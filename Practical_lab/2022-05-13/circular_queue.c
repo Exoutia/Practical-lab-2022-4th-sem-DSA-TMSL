@@ -41,62 +41,66 @@ void main()
 
 
 // function to insert an element in a circular queue
-void enqueue()
-{
-    int element;
-    printf("Enter data: ");
-    scanf("%d", &element);
-    if(front==-1 && rear==-1)   // condition to check queue is empty
-    {
-        front=0;
-        rear=0;
-        queue[rear]=element;
+void enqueue(){
+    int item;
+    if((rear == max-1 && front == 0) || (rear == front-1)){
+        printf("Queue is full\n");
+        return;
     }
-    else if((rear+1)%max==front)  // condition to check queue is full
+    if (front == -1){
+        front = 0;
+        rear = 0;
+    }
+    else if (rear == max-1)
     {
-        printf("Queue is overflow..");
+        rear = 0;
     }
     else
     {
-        rear=(rear+1)%max;       // rear is incremented
-        queue[rear]=element;     // assigning a value to the queue at the rear position.
+        rear++;
     }
+    printf("Enter the element to be inserted: ");
+    scanf("%d", &item);
+    queue[rear] = item;
 }
 
-// function to delete the element from the queue
-void dequeue()
-{
-    if((front==-1) && (rear==-1))  // condition to check queue is empty
-    {
-        printf("\nQueue is underflow..");
+void dequeue(){
+    int a = queue[front];
+    if(front == -1 && rear==-1){
+        printf("Queue is empty\n");
+        return;
     }
- else if(front==rear)
-{
-   printf("\nThe dequeued element is %d", queue[front]);
-   front=-1;
-   rear=-1;
-}
-else
-{
-    printf("\nThe dequeued element is %d", queue[front]);
-   front=(front+1)%max;
-}
-}
-// function to display the elements of a queue
-void display()
-{
-    int i=front;
-    if(front==-1 && rear==-1)
-    {
-        printf("\n Queue is empty..");
+    if(front == rear){
+        front = -1;
+        rear = -1;
     }
-    else
-    {
-        printf("\nElements in a Queue are :");
-        while(i<=rear)
-        {
-            printf("%d,", queue[i]);
-            i=(i+1)%max;
+    else if(front == max-1){
+        front = 0;
+    }
+    else{
+        front++;
+    }
+    printf("Deleted element is: %d", a);
+}
+
+void display(){
+    int i;
+    if(front == -1 && rear == -1){
+        printf("Queue is empty\n");
+        return;
+    }
+    printf("Queue elements are: ");
+    if(front <= rear){
+        for(i=front; i<=rear; i++){
+            printf("%d ", queue[i]);
+        }
+    }
+    else{
+        for(i=front; i<max; i++){
+            printf("%d ", queue[i]);
+        }
+        for(i=0; i<=rear; i++){
+            printf("%d ", queue[i]);
         }
     }
 }
