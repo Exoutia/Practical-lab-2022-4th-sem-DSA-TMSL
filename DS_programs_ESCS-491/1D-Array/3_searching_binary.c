@@ -1,28 +1,33 @@
 #include <stdio.h>
-
-void create_array(int arr[], int n){
-    int i;
-    for(i=0; i<n; i++){
-        printf("Enter the elements: ");
-        scanf("%d", &arr[i]);
-    }
-}
-
-void display_array(int arr[], int n){
-    int i;
-    printf("The array is: ");
-    for(i=0; i<n; i++){
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
+#include <stdlib.h>
 
 void main(){
-    int n, arr[n];
+    int n, arr[10], query, i;
     printf("Enter the number of elements: ");
     scanf("%d", &n);
-    create_array(arr, n);
-    display_array(arr, n);
-    
+    for(i=0; i<n; i++){
+        printf("Enter the element: ");
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the query: ");
+    scanf("%d", &query);
+    int low = 0, high = n-1, mid;
+    while(low <= high){
+        mid = (low+high)/2;
+        if(arr[mid] == query){
+            printf("%d is found at %d\n", query, mid);
+            break;
+        }
+        else if(arr[mid] < query){
+            low = mid+1;
+        }
+        else{
+            high = mid-1;
+        }
+    }
+    if(low>high){
+        printf("%d is not found\n", query);
+    }
+
 
 }
