@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void main(){
-    int n, arr[n], i, query, found = 0, pos;
+    int n, arr[20], i, query, found = 0, pos;
     printf("Enter the number of elements: ");
     scanf("%d", &n);
     for(i=0; i<n; i++){
